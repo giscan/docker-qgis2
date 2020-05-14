@@ -28,12 +28,12 @@ USER_NAME=`basename $HOME`
 # The user home is mounted as HOME
 # --rm will remove the container as soon as it ends
 
-
+#xhost local:root
 sudo docker run --rm --name qgis2 \
     -it \
     -v ${HOME}:/home/${USER_NAME} \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -e DISPLAY=unix$DISPLAY \
+    -e DISPLAY=$DISPLAY \
     -e MYHOME=${HOME} \
+    --env="QT_X11_NO_MITSHM=1"  \
     mundialis/docker-qgis2
-
